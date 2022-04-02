@@ -82,7 +82,7 @@ public class DoublyLinkedList {
            temp = temp.next;
        }
    }
-   public void deleteDuplicate(){
+   public void removeDuplicate(){
        Node i = head;
       
        while(i!=null){
@@ -120,8 +120,7 @@ public class DoublyLinkedList {
        obj.addNode(8);
        obj.addNode(10);
        obj.addNode(300);
-      // obj.addNode(11);
-       obj.deleteDuplicate();
+       obj.removeDuplicate();
        
        obj.display();
    }

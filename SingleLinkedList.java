@@ -1,3 +1,5 @@
+
+import java.util.ArrayList;
 class Node{
     int data;
     Node next;
@@ -78,6 +80,25 @@ public class SingleLinkedList {
 
 
     }
+    public void reverse(){
+     ArrayList<Integer> arr = new ArrayList<>();
+     Node temp = head;
+  
+     while(temp!=null){
+
+         arr.add(temp.data);
+         
+         temp = temp.next;
+     }
+     temp = head;
+
+     for(int i=arr.size()-1;i >=0;i--){
+        temp.data = arr.get(i);
+        temp = temp.next;
+
+     }
+        
+    } 
    public static void main(String[] args) {
        SingleLinkedList sl = new SingleLinkedList();
        sl.addNode(5);
@@ -86,5 +107,8 @@ public class SingleLinkedList {
        sl.addNode(20);
        sl.insert(20,60);
        sl.display();
+       System.out.println("After reversing: ");
+      sl.reverse();
+      sl.display();
    }
 }
