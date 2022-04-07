@@ -27,6 +27,7 @@ public class SingleLinkedList {
        
         
     }
+   
 
     public void display(){
         Node temp = head;

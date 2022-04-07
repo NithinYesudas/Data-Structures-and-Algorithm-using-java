@@ -39,6 +39,8 @@ public class DoublyLinkedList {
        }
 
    }
+
+   
    public void delete(int data){
        Node temp = head;
        if(head.data == data){
@@ -121,7 +123,7 @@ public class DoublyLinkedList {
        obj.addNode(10);
        obj.addNode(300);
        obj.removeDuplicate();
-       
+       //obj.reverse();
        obj.display();
    }
 
