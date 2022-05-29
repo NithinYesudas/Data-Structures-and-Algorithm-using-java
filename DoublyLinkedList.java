@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class Node{
     int data;
     Node prev;
@@ -27,7 +29,7 @@ public class DoublyLinkedList {
    tail = newNode;
    
    }
-   public void display(){
+   public void displayForward(){
        if(head == null){
            System.out.println("empty");
            return;
@@ -39,6 +41,19 @@ public class DoublyLinkedList {
        }
 
    }
+   public void displayBackward(){
+    if(head == null){
+        System.out.println("empty");
+        return;
+    }
+    Node temp = tail;
+    while(temp!=null){
+        System.out.println(temp.data);
+        temp = temp.prev;
+    }
+
+}
+
 
    
    public void delete(int data){
@@ -51,18 +66,21 @@ public class DoublyLinkedList {
        while(temp!=null){
 
          if(temp.data == data){
-             temp.prev.next = temp.next;
-             temp.next.prev = temp.prev;
-             if(temp == tail){
-                 tail = temp.prev;
-                 tail.next = null;
-             }
+            if(temp == tail){
+                tail = temp.prev;
+                tail.next = null;
+            }
+             else {temp.prev.next = temp.next;
+             temp.next.prev = temp.prev;}
+            
              return;
          }
          temp = temp.next;
 
        }
-   }
+       System.out.println("No matching data found");
+    }
+   
    public void insert(int searchData, int data){
        Node newNode = new Node(data);
        Node temp = head;
@@ -77,12 +95,15 @@ public class DoublyLinkedList {
            if(searchData == temp.data){
                newNode.next = temp;
                temp.prev.next = newNode;
+               newNode.prev = temp.prev;
                temp.prev = newNode;
+
                return;
 
            }
            temp = temp.next;
        }
+       System.out.println("No matching data found");
    }
    public void removeDuplicate(){
        Node i = head;
@@ -109,22 +130,40 @@ public class DoublyLinkedList {
    }
    public static void main(String[] args) {
        DoublyLinkedList obj = new DoublyLinkedList();
-       obj.addNode(10);
-       obj.addNode(10);
-       obj.addNode(20);
-       obj.addNode(300);
+       Scanner input = new Scanner(System.in);
        
-       obj.insert(300, 50);
-       obj.addNode(5);
-       obj.addNode(5);
-       obj.addNode(10);
-       obj.addNode(8);
-       obj.addNode(8);
-       obj.addNode(10);
-       obj.addNode(300);
-       obj.removeDuplicate();
-       //obj.reverse();
-       obj.display();
+       int choice=0,temp;
+        while(choice!=6){
+            System.out.println("Enter 1 to add, 2 for delete, 3 for insert between, 4 for displaying forward, 5 for displaying backward, 6 for exit: ");
+            choice = input.nextInt();
+            switch(choice){
+                
+                case 1: System.out.println("Enter number to add");
+                temp = input.nextInt();
+                obj.addNode(temp);
+                break;
+
+                case 2: System.out.println("Enter the element to be deleted: ");
+                        temp = input.nextInt();
+                        obj.delete(temp);
+                        break;
+
+                case 3: System.out.println("Enter where to insert: ");
+                        temp = input.nextInt();
+                        System.out.println("Enter the data to be inserted: ");
+                        int data = input.nextInt();
+                        obj.insert(temp, data); 
+                        break;
+
+                case 4: System.out.println("Current elements in forward direction: ");
+                        obj.displayForward();
+                        break;
+                
+                case 5: System.out.println("Current elements in backward direction:"); 
+                        obj.displayBackward();       
+            }   
+
+        }
    }
 
     

@@ -1,10 +1,9 @@
-
-import java.util.ArrayList;
+import java.util.*;
 class Node{
     int data;
     Node next;
-    Node(int data){
-        this.data = data;
+    Node(int d){
+        data = d;
     }
 }
 
@@ -16,16 +15,12 @@ public class SingleLinkedList {
         Node newNode = new Node(data);
         if(head==null){
             head = newNode;
-            tail = newNode;
-            
+            tail = newNode;    
         }
         else{
             tail.next = newNode;
-
         }
-        tail = newNode;
-       
-        
+        tail = newNode;   
     }
    
 
@@ -45,16 +40,19 @@ public class SingleLinkedList {
             head = head.next;
             return;
         }
-        Node temp = head,prev = null;
+        Node temp = head;
         while(temp!=null){
-            if(temp.data == data){
-                prev.next = temp.next;
-                if(temp == tail){
-                    tail = prev;
+            if(temp.next.data == data){
+                if(temp.next == tail){
+                    tail = temp;
                     tail.next = null;
                 }
+
+                else temp.next = temp.next.next;
+                
+                return;
             }
-            prev = temp;
+            
             temp = temp.next;
         }
     }
@@ -69,7 +67,7 @@ public class SingleLinkedList {
             return;
 
         }
-        while(temp!=null){
+        while(temp.next!=null){
             if(temp.next.data == searchData){
                 newNode.next = temp.next;
                 temp.next = newNode;
@@ -78,38 +76,45 @@ public class SingleLinkedList {
             }
             temp = temp.next;
         }
+        System.out.println("No matching data found");
 
 
     }
-    public void reverse(){
-     ArrayList<Integer> arr = new ArrayList<>();
-     Node temp = head;
-  
-     while(temp!=null){
-
-         arr.add(temp.data);
-         
-         temp = temp.next;
-     }
-     temp = head;
-
-     for(int i=arr.size()-1;i >=0;i--){
-        temp.data = arr.get(i);
-        temp = temp.next;
-
-     }
-        
-    } 
+   
    public static void main(String[] args) {
-       SingleLinkedList sl = new SingleLinkedList();
-       sl.addNode(5);
-       sl.addNode(10);
-       sl.addNode(15);
-       sl.addNode(20);
-       sl.insert(20,60);
-       sl.display();
-       System.out.println("After reversing: ");
-      sl.reverse();
-      sl.display();
+       SingleLinkedList obj = new SingleLinkedList();
+       Scanner input = new Scanner(System.in);
+       
+       int choice=0,temp;
+        while(choice!=5){
+            System.out.println("Enter 1 to add, 2 for delete, 3 for insert between, 4 for displaying, 5 for exit: ");
+            choice = input.nextInt();
+            switch(choice){
+                
+                case 1: System.out.println("Enter number to add");
+                temp = input.nextInt();
+                obj.addNode(temp);
+                break;
+
+                case 2: System.out.println("Enter the element to be deleted: ");
+                        temp = input.nextInt();
+                        obj.delete(temp);
+                        break;
+
+                case 3: System.out.println("Enter where to insert: ");
+                        temp = input.nextInt();
+                        System.out.println("Enter the data to be inserted: ");
+                        int data = input.nextInt();
+                        obj.insert(temp, data); 
+                        break;
+
+                case 4: System.out.println("Current elements are: ");
+                        obj.display();
+                        break;
+            }
+
+        }
+        
+      
    }
 }

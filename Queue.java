@@ -16,6 +16,9 @@ public class Queue {
             temp = temp.next;
         }
     }
+    public boolean isEmpty(){
+        return front == null;
+    }
     public void deQueue(){
       front = front.next;
       if(front == null)rear = null;
@@ -39,19 +42,29 @@ public class Queue {
     public static void main(String[] args) {
         Queue st = new Queue();
         Scanner input = new Scanner(System.in);
-        int a;
-        a = input.nextInt();
+        int temp;
+        int choice=0;
+        while(choice!=4){
+            System.out.println("Enter 1 for enqueue, 2 for dequeue, 3 for displaying and 4 for exit: ");
+            choice = input.nextInt();
+            switch(choice){
+                
+                case 1: System.out.println("Enter number to add");
+                temp = input.nextInt();
+                st.enqueue(temp);
+                break;
+                case 2: if(!st.isEmpty())st.deQueue();else System.out.println("Queue empty");
+                        break;
 
-        
-        st.enqueue(a);
-        a = input.nextInt();
-        st.enqueue(a);
-        a = input.nextInt();
+                
+                case 3:  if(!st.isEmpty())st.display();else System.out.println("Queue empty");    
+                         break;   
 
-        st.enqueue(a);
-        st.deQueue();
-        st.display();
+            }
+
+        }
+   }
 
     }
     
-}
+
