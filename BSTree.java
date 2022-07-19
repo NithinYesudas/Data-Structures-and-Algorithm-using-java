@@ -1,3 +1,4 @@
+import java.lang.*;
 
 class Node{
    public Node left;
@@ -19,9 +20,9 @@ public class BSTree {
           return;
       }
       Node temp = root;
-      boolean flag = true;
-      while(temp.parent!=null || flag){
-          flag = false;
+      
+      while(temp!=null){
+          
           if(newNode.data<=temp.data){
               if(temp.left == null){
                   temp.left = newNode;
@@ -29,8 +30,6 @@ public class BSTree {
                   return;
               }
               temp = temp.left;
-              
-              
           }
           else if(newNode.data>temp.data){
               if(temp.right == null){
@@ -39,12 +38,10 @@ public class BSTree {
                   break;
               }
               temp=temp.right;
-          }
-          
-
+            }   
       }
-
     }
+
     public void contains(int data){
         Node temp = root;
         boolean flag = true;
@@ -64,6 +61,7 @@ public class BSTree {
         }
         System.out.println("not found");
     }
+
     public void remove(int data){
         Node temp = root;
         while(temp!=null){
@@ -88,23 +86,106 @@ public class BSTree {
         }
         System.out.println("deletion failed data not found");
     }
+
     private int getMin(Node temp){
-        while(temp.left!=null){
-            temp = temp.left;
+        if(temp.left==null){
+            temp.parent.right = null;
+        }
+        else{
+            while(temp.left!=null){
+                temp = temp.left;
+            }
+          
+            temp.parent.left = null;
         }
         int a = temp.data;
-        temp.parent.left = null;
         return a;
     }
+
     private int getMax(Node temp){
-        while(temp.right!=null){
+        if(temp.right==null){
+            temp.parent.left= null;
+        }
+        else{
+            while(temp.right!=null){
+                temp = temp.right;
+            }
+            
+            temp.parent.right = null;
+        }
+        
+        int a = temp.data;
+        return a;
+    }
+
+   public void preOrder(){
+       System.out.println("Pre-Order");
+       preOrderHelper(root);
+
+   }
+
+   private void preOrderHelper(Node temp){
+       if(temp!=null){
+        System.out.println(temp.data);
+        preOrderHelper(temp.left);
+        preOrderHelper(temp.right);
+
+       }
+       
+   }
+
+   public void postOrder(){
+       System.out.println("Post-Order");
+       postOrderHelper(root);
+   }
+   public void postOrderHelper(Node temp){
+       if(temp!=null){
+           postOrderHelper(temp.left);
+           postOrderHelper(temp.right);
+           System.out.println(temp.data);
+       }
+   }
+
+public void inOrder(){
+     System.out.println("In-Order");
+    inOrderHelper(root);
+}
+public void inOrderHelper(Node temp){
+    if(temp!=null){
+        inOrderHelper(temp.left);
+        System.out.println(temp.data);
+        inOrderHelper(temp.right);
+        
+    }
+}
+
+public void findNearest(int data){
+    Node temp = root;
+    int currentValue = temp.data;
+    while(temp!=null){
+        if(Math.abs(data-temp.data)<Math.abs(currentValue-data)){
+            currentValue = temp.data;
+        }
+        if(data<temp.data){
+            temp= temp.left;
+        }
+        else if(data>temp.data){
+            
             temp = temp.right;
         }
-        int a = temp.data;
-        temp.parent.right = null;
-        return a;
+        else{
+            currentValue = temp.data;
+            
+           break;
+        }
     }
+    System.out.println(currentValue);
+   
+
+
+}
     
+
     public static void main(String[] args) {
         BSTree obj = new BSTree();
         obj.addNode(10);
@@ -115,7 +196,11 @@ public class BSTree {
         obj.addNode(14);
         obj.addNode(16);
         obj.addNode(4);
+        obj.addNode(7);
+        obj.addNode(6);
         obj.remove(5);
+        obj.findNearest(9);
+        obj.inOrder();
         obj.contains(4);
     }
    
