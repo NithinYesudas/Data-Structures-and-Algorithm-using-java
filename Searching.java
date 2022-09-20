@@ -19,27 +19,22 @@ public class Searching {
     }
    
 
+   
     public int binarySearch(int data){
-        int start=0,end=arr.length-1,middle=0;
-        while(start<=end){
-            middle = (start+end)/2;
-            if(arr[middle]>data){
-                
-                end = middle-1;
-                
+        int start=0,end =arr.length-1,middle=0;
+        while(start<end){
+            middle=(start+end)/2;
+            if(arr[middle]<data){
+                start=middle+1;
             }
-            else if(arr[middle]<data){
-                
-                start= middle+1;
+            else if(arr[middle]>data){
+                end = middle-1;
             }
             else{
                 break;
             }
-            
-           
         }
         return middle;
-
     }
     public static void main(String[] args) {
         Searching obj = new Searching();

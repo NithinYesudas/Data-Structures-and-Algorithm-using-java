@@ -65,6 +65,23 @@ public class SampleList {
             temp = temp.nextNode;
         }
     }
+    
+    public void moveToFront(int k){
+        int count=0;
+        Node temp = head;
+        while(temp!=null){
+            count++;
+            temp=temp.nextNode;
+        }
+        temp = head;
+        tail.nextNode = head;
+        for(int i=1;i<count-k;i++){
+            temp = temp.nextNode;
+        }
+        head =temp.nextNode;
+         tail = temp;
+         tail.nextNode=null; 
+    }
    
 
     public static void main(String[] arg){
@@ -73,8 +90,8 @@ public class SampleList {
         Scanner sc  = new Scanner(System.in);
         int choice=0;
         int data;
-        while(choice!=6){
-            System.out.println("Enter 1 for addLast, 2 for addFirst, 3 for deleteFirst, 4 for insert, 5 for display, 6 for cancel ");
+        while(choice!=7){
+            System.out.println("Enter 1 for addLast, 2 for addFirst, 3 for deleteFirst, 4 for insert, 5 for display, 6 to move to front, 7 for cancel ");
             choice = sc.nextInt();
             switch(choice){
                 case 1: 
@@ -99,6 +116,11 @@ public class SampleList {
                 break;
                 case 5:
                 obj.display();
+                break;
+                case 6:
+                System.out.println("Enter k: ");
+                data=sc.nextInt();
+                obj.moveToFront(data);
                 break;
 
             }

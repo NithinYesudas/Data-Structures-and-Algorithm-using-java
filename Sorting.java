@@ -38,6 +38,20 @@ public class Sorting {
         }
 
     }
+    public void bubbleSort(){
+        int swap;
+        for(int i =1;i<arr.length;i++){
+            for(int j=0;j<arr.length-i;j++){
+                if(arr[j]<
+                arr[j+1]){
+                    swap = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = swap;
+                }
+            }
+        }
+
+    }
 
     public void insertionSort(){
         int swap=0,current;
@@ -93,10 +107,11 @@ public class Sorting {
     }
     public static void main(String[] args) {
         Sorting obj = new Sorting();
-        obj.addList();
-       obj.quickSort();
+       obj.addList();
+      obj.bubbleSort();
         System.out.println("After Sorting: ");
         obj.display();
+       
         
     }
     
