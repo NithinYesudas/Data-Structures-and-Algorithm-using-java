@@ -1,4 +1,5 @@
 import java.lang.*;
+import java.util.Stack;
 
 class Node{
    public Node left;
@@ -74,9 +75,9 @@ public class BSTree {
             }
             else{
                 if(temp.right!=null)
-                temp.data = getMin(temp.right);
+                temp.data = getMin(temp);
                 else if(temp.left!=null)
-                temp.data = getMax(temp.left);
+                temp.data = getMax(temp);
                 else 
                 temp.data = getMin(temp);
                 System.out.println("Data deleted succesfully");
@@ -86,37 +87,70 @@ public class BSTree {
         }
         System.out.println("deletion failed data not found");
     }
-
-    private int getMin(Node temp){
-        if(temp.left==null){
-            temp.parent.right = null;
-        }
-        else{
-            while(temp.left!=null){
-                temp = temp.left;
-            }
-          
-            temp.parent.left = null;
-        }
-        int a = temp.data;
-        return a;
-    }
-
     private int getMax(Node temp){
-        if(temp.right==null){
-            temp.parent.left= null;
+        Node q = temp;
+        temp = temp.left;
+        while(temp.right!=null){
+            q = temp;
+            temp = temp.right;
         }
-        else{
-            while(temp.right!=null){
+        if(temp.left != null){
+            q.left = temp.left;
+        }
+        return temp.data;
+
+
+    }
+    public void sumFinder(int low,int high){
+        int sum = sumHelper(root, 0, low, high);
+        System.out.println(sum);
+
+ 
+    }
+    public int sumHelper(Node temp, int sum,int low,int high){
+        if(temp!=null){
+            if(temp.data>low && temp.data < high){
+                sum+=temp.data;
+            }
+            sum = sumHelper(temp.left,sum,low,high);
+            sum = sumHelper(temp.right,sum,low,high);
+        }
+        return sum;
+
+    }
+    private int getMin(Node temp){               
+        Node q=temp;
+        temp = temp.right;
+        while(temp.left!=null){
+            q = temp;
+            temp = temp.left;
+        }
+        if(temp.right!=null){
+            q.right = temp.right;
+        }
+        return temp.data;
+    }
+    
+    public void inorderIterative(){
+        Stack<Node> stack = new Stack<>();
+        Node temp = root;
+        do{
+            while(temp!=null){
+                stack.push(temp);
+                temp=temp.left;
+
+            }
+            if(!stack.isEmpty()){
+                temp = stack.pop();
+                System.out.println(temp.data);
                 temp = temp.right;
             }
-            
-            temp.parent.right = null;
-        }
-        
-        int a = temp.data;
-        return a;
+        }while(temp!=null || !stack.isEmpty());
     }
+
+   
+
+   
 
    public void preOrder(){
        System.out.println("Pre-Order");
@@ -188,20 +222,18 @@ public void findNearest(int data){
 
     public static void main(String[] args) {
         BSTree obj = new BSTree();
-        obj.addNode(10);
-        obj.addNode(5);
-        obj.addNode(15);
-        obj.addNode(99);
-        obj.addNode(13);
-        obj.addNode(14);
-        obj.addNode(16);
+        obj.addNode(2);
+        obj.addNode(1);
+        obj.addNode(3);
         obj.addNode(4);
         obj.addNode(7);
         obj.addNode(6);
-        obj.remove(5);
-        obj.findNearest(9);
-        obj.inOrder();
-        obj.contains(4);
+       obj.addNode(5);
+       obj.addNode(9);
+       obj.sumFinder(3, 7);
+       // obj.findNearest(9);
+       // obj.inorderIterative();
+       // obj.contains(4);
     }
    
 }

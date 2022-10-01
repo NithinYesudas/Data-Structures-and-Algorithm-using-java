@@ -32,7 +32,7 @@ public class Doubly {
 
     public Doubly twister(Doubly link,Doubly dlink){
        Node  currentNode = link.tail;
-        while(currentNode != null){/
+        while(currentNode != null){
 
             dlink.addNode(currentNode.data);
             currentNode = currentNode.prev;

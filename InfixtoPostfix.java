@@ -23,7 +23,7 @@ public class InfixtoPostfix {
             char temp = exp.charAt(i);
             if (Character.isLetterOrDigit(temp)) {
                 finalExp += temp;
-            } else if (!Character.isLetterOrDigit(temp)) {
+            } else {
                 if (temp == ')') {
                     while (stack.peek() != '(') {
                         finalExp += stack.pop();
@@ -32,7 +32,7 @@ public class InfixtoPostfix {
                     finalExp += ')';
                 } else if (temp == '(') {
                     stack.push('(');
-                } else if (stack.isEmpty()) {
+                } else if (stack.isEmpty() || temp == '(') {
                     stack.push(temp);
                 } else if (precedence(temp) > precedence(stack.peek())) {
                     stack.push(temp);

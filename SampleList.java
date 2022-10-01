@@ -53,34 +53,79 @@ public class SampleList {
         newNode.nextNode = head;
         head = newNode;
     }
-    public void insertMiddle(int where, int data){
+    // public void insertMiddle(int where, int data){
+    //     Node newNode = new Node(data);
+    //     Node temp = head;
+    //     while(temp!=null){
+    //         if(temp.data == where){
+    //             newNode.nextNode = temp.nextNode;
+    //             temp.nextNode = newNode;
+    //             break;
+    //         }
+    //         temp = temp.nextNode;
+    //     }
+    // }
+    public void insertMiddle(int key,int data){
         Node newNode = new Node(data);
         Node temp = head;
         while(temp!=null){
-            if(temp.data == where){
+            if(temp.data == key){
                 newNode.nextNode = temp.nextNode;
                 temp.nextNode = newNode;
+                if(temp==tail)tail= newNode;
                 break;
             }
             temp = temp.nextNode;
         }
     }
-    
-    public void moveToFront(int k){
-        int count=0;
+    public void deleteKey(int key){
         Node temp = head;
-        while(temp!=null){
-            count++;
-            temp=temp.nextNode;
+        if(temp.data == key){
+            head = head.nextNode;
+            return;
         }
-        temp = head;
-        tail.nextNode = head;
-        for(int i=1;i<count-k;i++){
+        while(temp.nextNode!=null){
+            if(temp.nextNode.data == key){
+                if(temp.nextNode == tail){
+                    temp.nextNode = null;
+                    tail = temp;
+                    break;
+                }
+                temp.nextNode = temp.nextNode.nextNode;
+            }
             temp = temp.nextNode;
         }
-        head =temp.nextNode;
-         tail = temp;
-         tail.nextNode=null; 
+    }
+    
+    
+    public void moveToFront(int n){
+        int count=0;
+        Node temp= head;
+        while(temp!=null){
+            count++;
+            temp = temp.nextNode;
+        }
+        temp =head;
+        for(int i=1;i<count-n;i++){
+            temp = temp.nextNode;
+
+        }
+        tail.nextNode = head;
+        head = temp.nextNode;
+        temp.nextNode = null;
+        tail = temp;
+    }
+    public void reverse(){
+        Node temp = tail;
+        Node temp2 = head;
+        while(temp2!=null){
+            temp.nextNode = temp2;
+            temp = temp2;
+            temp2 = temp2.nextNode;
+            
+        }
+        head = tail;
+        tail = temp;
     }
    
 
@@ -105,7 +150,9 @@ public class SampleList {
                 obj.addFirst(data);
                 break;
                 case 3: 
-                obj.deleteFirst();
+                System.out.println("Enter the data to be deleted");
+                data = sc.nextInt();
+                obj.deleteKey(data);
                 break;
                 case 4:
                 System.out.println("where do u want to insert: ");

@@ -31,8 +31,8 @@ public class PolynimialAddition {
             System.out.print(temp.coefficient);
             if(temp.power!=0)
             System.out.print("x^"+temp.power);
-            if(temp.coefficient>=0);
-            System.out.print(" + ");
+             if(temp.nextNode!=null)
+             System.out.print(" + ");
             temp = temp.nextNode;
         }
     }

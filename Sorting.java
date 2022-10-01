@@ -18,56 +18,51 @@ public class Sorting {
     
     }
 
+ 
     public void selectionSort(){
-        int small=0,swap,pos=0;
+        int small=0,temp,pos;
         for(int i=0;i<arr.length;i++){
             small = arr[i];
-            pos=-1;
+            pos =-1;
             for(int j=i;j<arr.length;j++){
-                
-                if(small>arr[j]){
+                if(arr[j]<small){
                     small = arr[j];
-                    pos=j;
+                    pos = j;
                 }
             }
-            if(pos==-1)
-            break;
-            swap = arr[i];
+            if(pos == -1)break;
+            temp = arr[i];
             arr[i] = arr[pos];
-            arr[pos] = swap;
+            arr[pos] = temp;
         }
-
     }
+  
     public void bubbleSort(){
-        int swap;
-        for(int i =1;i<arr.length;i++){
+        int temp;
+        for(int i=1;i<arr.length;i++){
             for(int j=0;j<arr.length-i;j++){
-                if(arr[j]<
-                arr[j+1]){
-                    swap = arr[j];
+                if(arr[j]>arr[j+1]){
+                    temp = arr[j];
                     arr[j] = arr[j+1];
-                    arr[j+1] = swap;
+                    arr[j+1] = temp;
                 }
             }
         }
-
     }
 
+   
     public void insertionSort(){
-        int swap=0,current;
+        int current,temp;
         for(int i=1;i<arr.length;i++){
             current = i;
-            for(int j=current-1;j>=0;j--){
-                if(arr[current]<arr[j]){
-                    swap = arr[current];
-                    arr[current] = arr[j];
-                    arr[j] = swap;
-                    current=j;
-
+            for(int j=i-1;j>=0;j--){
+                if(arr[j]>arr[current]){
+                   temp = arr[j];
+                   arr[j] = arr[current];
+                   arr[current] = temp;
+                   current = j; 
                 }
-                else{
-                    break;
-                }
+                else break;
             }
         }
     }
@@ -75,22 +70,25 @@ public class Sorting {
         quickSortHelper(0, arr.length-1);
 
     }
-    private void quickSortHelper(int low, int high){
-       if(low<high){
-        int pivot = arr[high];
-        int i = low-1;
-        for(int j = low;j<=high-1;j++){
-            if(arr[j]<pivot){
-                i++;
-                swapHelper(i, j);
+    public void quickSortHelper(int low, int high){
+        if(low<high){
+            int pivot = arr[high];
+            int i = low-1;
+            for(int j = low;j<high;j++){
+                if(arr[j]<pivot){
+                    i++;
+                    swapHelper(i, j);
+                }
             }
+            i++;
+            swapHelper(i, high);
+            quickSortHelper(low, i-1);
+            quickSortHelper(i+1, high);
+
         }
-        i++;
-        swapHelper(i, high);
-        quickSortHelper(low, i-1);
-        quickSortHelper(i+1, high);
-       }
+        
     }
+   
     private void swapHelper(int i,int j){
         int temp = arr[i];
         arr[i]=arr[j];       
@@ -108,7 +106,7 @@ public class Sorting {
     public static void main(String[] args) {
         Sorting obj = new Sorting();
        obj.addList();
-      obj.bubbleSort();
+      obj.quickSort();
         System.out.println("After Sorting: ");
         obj.display();
        

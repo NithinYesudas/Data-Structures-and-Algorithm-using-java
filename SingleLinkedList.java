@@ -23,6 +23,19 @@ public class SingleLinkedList {
         }
         tail = newNode;
     }
+    public void reverse(SingleLinkedList l){
+      Node temp1 = l.head;
+      Node temp2 = head.next;
+      while(temp1!=null){
+        temp2.next = temp1;
+        
+      }
+
+        
+        
+
+       
+    }
 
     public void display() {
         Node temp = head;
@@ -87,8 +100,8 @@ public class SingleLinkedList {
         Scanner input = new Scanner(System.in);
 
         int choice = 0, temp;
-        while (choice != 5) {
-            System.out.println("Enter 1 to add, 2 for delete, 3 for insert between, 4 for displaying, 5 for exit: ");
+        while (choice != 6) {
+            System.out.println("Enter 1 to add, 2 for delete, 3 for insert between, 4 for displaying,5 for reverse,6 for exit: ");
             choice = input.nextInt();
             switch (choice) {
 
@@ -116,6 +129,8 @@ public class SingleLinkedList {
                     System.out.println("Current elements are: ");
                     obj.display();
                     break;
+                case 5:
+                obj.reverse(obj);    
             }
 
         }
