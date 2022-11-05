@@ -94,6 +94,30 @@ public class SingleLinkedList {
         System.out.println("No matching data found");
 
     }
+    void deleteDuplicate(){
+        Node temp = head;
+        Node key = head;
+        Node prev;
+        while(key!=null){
+            prev = key;
+            temp = key.next;
+            
+            while(temp!=null){
+                if(temp.data == key.data){
+                    prev.next = temp.next;
+                    if(temp == tail){
+                        tail = prev;
+                    }
+
+                }
+                prev = temp;
+                temp = temp.next;
+
+            }
+            key = key.next;
+
+        }
+    }
 
     public static void main(String[] args) {
         SingleLinkedList obj = new SingleLinkedList();
@@ -101,7 +125,7 @@ public class SingleLinkedList {
 
         int choice = 0, temp;
         while (choice != 6) {
-            System.out.println("Enter 1 to add, 2 for delete, 3 for insert between, 4 for displaying,5 for reverse,6 for exit: ");
+            System.out.println("Enter 1 to add, 2 for delete, 3 for insert between, 4 for displaying,5 for delDuplicate,6 for exit: ");
             choice = input.nextInt();
             switch (choice) {
 
@@ -130,7 +154,7 @@ public class SingleLinkedList {
                     obj.display();
                     break;
                 case 5:
-                obj.reverse(obj);    
+                obj.deleteDuplicate();    
             }
 
         }
