@@ -62,7 +62,7 @@ public class BSTree {
     }
 
     public void remove(int data) {
-        Node temp = root,prev = temp;
+        Node temp = root, prev = temp;
         while (temp != null) {
             if (data < temp.data) {
                 prev = temp;
@@ -76,15 +76,14 @@ public class BSTree {
                     temp.data = getMin(temp);
                 else if (temp.left != null)
                     temp.data = getMax(temp);
-                else{
-                    if(temp.data<prev.data){
+                else {
+                    if (temp.data < prev.data) {
                         prev.left = null;
-                    }
-                    else{
+                    } else {
                         prev.right = null;
                     }
                 }
-                    
+
                 System.out.println("Data deleted succesfully");
                 return;
 
@@ -101,27 +100,30 @@ public class BSTree {
             temp = temp.left;
 
         }
-        if (prev == key)
-            prev.right = null;
+        if (prev == key) {
+            prev.right = temp.right;
+
+        }
 
         else
             prev.left = temp.right;
         return temp.data;
 
     }
-    private int getMax(Node key){
+
+    private int getMax(Node key) {
         Node prev = key;
         Node temp = key.left;
-        while(temp.right!=null){
+        while (temp.right != null) {
             prev = temp;
             temp = temp.right;
         }
-        if(prev == key){
-            prev.left = null;
-        }
-        else{
+        if (prev == key) {
+            prev.left = temp.right;
+
+        } else
             prev.right = temp.left;
-        }
+
         return temp.data;
     }
 
@@ -227,18 +229,13 @@ public class BSTree {
 
     public static void main(String[] args) {
         BSTree obj = new BSTree();
-        obj.addNode(10);
-        obj.addNode(8);
-        obj.addNode(12);
-        obj.addNode(5);
-        obj.addNode(9);
-        obj.addNode(11);
-        obj.addNode(14);
-        obj.addNode(4);
-        obj.addNode(7);
+        obj.addNode(1);
+        obj.addNode(2);
         obj.addNode(3);
+        obj.addNode(4);
+        obj.addNode(5);
         obj.addNode(6);
-        obj.remove(8);
+        obj.remove(3);
         obj.inOrder();
 
     }
