@@ -119,7 +119,7 @@ public class BSTree {
             temp = temp.right;
         }
         if (prev == key) {
-            prev.left = temp.right;
+            prev.left = temp.left;
 
         } else
             prev.right = temp.left;
