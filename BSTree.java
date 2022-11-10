@@ -235,8 +235,9 @@ public class BSTree {
         obj.addNode(4);
         obj.addNode(5);
         obj.addNode(6);
-        obj.remove(3);
+        obj.remove(6);
         obj.inOrder();
+        obj.postOrder();
 
     }
 
